@@ -1,13 +1,11 @@
 class Tile
-    attr_accessor :bomb, :value
-    attr_reader :revealed
+    attr_accessor :is_bomb, :value, :flagged, :revealed
     
-    def initialize(bomb = false)
+    def initialize(is_bomb = false)
         @revealed = false
-        @bomb = bomb
+        @is_bomb = is_bomb
+        @flagged = false
         @value = nil
     end
-
-
     
 end
