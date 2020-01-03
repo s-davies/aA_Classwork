@@ -73,7 +73,8 @@ class Board
     
     def print
         color_hash = {1 => :blue, 2 => :green, 3 => :red, 4 => :magenta, 5 => :cyan, 6 => :yellow}
-        grid.each do |row|
+        puts "  " + ("0"...grid.length.to_s).to_a.join(" ")
+        grid.each_with_index do |row,idx|
             printed_row = row.map do |tile|
                 if tile.is_bomb && tile.revealed
                     '*'.black.on_red
@@ -91,7 +92,7 @@ class Board
                     '#'
                 end
             end.join(' ')
-            puts printed_row
+            puts idx.to_s + " " + printed_row
         end
         nil
     end
