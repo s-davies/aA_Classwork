@@ -72,16 +72,21 @@ class Board
     end
     
     def print
+        color_hash = {1 => :blue, 2 => :green, 3 => :red, 4 => :magenta, 5 => :cyan, 6 => :yellow}
         grid.each do |row|
             printed_row = row.map do |tile|
                 if tile.is_bomb && tile.revealed
-                    '*'.red
-                elsif tile.revealed && tile.value > 0
+                    '*'.black.on_red
+                elsif tile.is_bomb && !tile.revealed && self.lost? && !tile.flagged
+                    "*".red
+                elsif tile.revealed && tile.value.between?(1,6)
+                    tile.value.to_s.colorize(color_hash[tile.value])
+                elsif tile.revealed && tile.value > 6
                     tile.value.to_s
                 elsif tile.revealed && tile.value == 0
                     " "
                 elsif tile.flagged
-                    "F"
+                    "F".yellow
                 else
                     '#'
                 end

@@ -9,6 +9,7 @@ class Game
         puts "Welcome to minesweeper. Enter a board size:"
         begin
             size = gets.chomp.to_i
+            self.check_size(size)
         rescue StandardError => exception
             puts exception
             retry
