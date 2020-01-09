@@ -1,0 +1,2 @@
+still need to fix the in_check? method in the board class to account for other pieces moving
+in front of the king to get the king out of check
