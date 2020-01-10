@@ -2,9 +2,9 @@ require_relative "piece"
 class Pawn < Piece
     def symbol
         if self.color.downcase == :white
-            "♙"
+            "♙".white
         else
-            "♟"
+            "♟".black
         end
     end
 

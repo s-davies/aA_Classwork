@@ -6,13 +6,16 @@ require_relative 'queen.rb'
 require_relative 'rook.rb'
 require_relative 'king.rb'
 require_relative 'bishop.rb'
-
+require "byebug"
 class Board
 
     attr_reader :chess_board
+    attr_accessor :last_killed, :last_killed_pos
 
     def initialize
         @chess_board = Array.new(8) {Array.new(8){NullPiece.instance}}
+        @last_killed = NullPiece.instance
+        @last_killed_pos = nil
     end
 
     def fill_board
@@ -57,9 +60,18 @@ class Board
     end
     def move_piece(start_pos,end_pos)
         piece = self[start_pos]
+        self.last_killed_pos = start_pos
+        self.last_killed = self[end_pos]
         self[end_pos] = piece
         piece.pos = end_pos 
         self[start_pos] = NullPiece.instance 
+    end
+
+    def undo_move_piece(start_pos, end_pos)
+        piece = self[end_pos]
+        self[start_pos] = piece
+        piece.pos = start_pos
+        self[end_pos] = self.last_killed
     end
 
     def [](pos)
@@ -77,22 +89,20 @@ class Board
     end
 
     def safe_moves(color)
-        opposite_color_moves = []
+        s_moves = []
         self.chess_board.each_with_index do |row, row_idx|
             row.each_with_index do |piece, piece_idx|
-                v_moves = piece.valid_moves
-                opposite_color_moves += v_moves if piece.color != color
+                if piece.color == color
+                    v_moves = piece.valid_moves
+                    v_moves.each do |v_move|
+                        self.move_piece(piece.pos, v_move)
+                        s_moves << v_move unless in_check?(color)
+                        self.undo_move_piece(self.last_killed_pos, v_move)
+                    end
+                end
             end
         end
-        uniq_opp = opposite_color_moves.uniq
-        king = find_king(color)
-        safe_moves = Hash.new {|h,k| h[k] = []}
-        king.valid_moves.each do |move|
-            if !uniq_opp.include?(move)
-                safe_moves[king.pos] << move
-            end
-        end
-        safe_moves
+        s_moves
     end
 
     def in_check?(color)
@@ -100,12 +110,10 @@ class Board
         king_pos = king.pos
         self.chess_board.each_with_index do |row, row_idx|
             row.each_with_index do |piece, piece_idx|
-                
                 return true if piece.valid_moves.include?(king_pos) && piece.color != color #probably don't need second half of statement
             end
         end
         false
-        #need to fix when moving a piece in front of the king would save him from check
     end
 
     def find_king(color)

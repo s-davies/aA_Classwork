@@ -6,9 +6,9 @@ class Rook < Piece
 
     def symbol
         if self.color.downcase == :white
-            "♖"
+            "♖".white
         else
-            "♜"
+            "♜".black
         end
     end
 

@@ -2,6 +2,7 @@ require_relative "board.rb"
 require_relative "player"
 require_relative "display"
 require "byebug"
+require "colorize"
 class Game
     attr_reader :board, :display, :player1, :player2
     attr_accessor :current_player, :previous_player
@@ -16,6 +17,7 @@ class Game
     end
 
     def self.play
+        system("clear")
         puts "Welcome to chess!"
         player1 = Player.new(:white)
         player2 = Player.new(:black)
@@ -24,10 +26,8 @@ class Game
         d = game.display
         until b.checkmate?(:white) || b.checkmate?(:black)
             d.render
+            puts("Check!") if b.in_check?(:white) || b.in_check?(:black)
             game.get_start_pos
-            
-            
-            
             game.switch_turn
         end
         d.render
@@ -41,7 +41,12 @@ class Game
             self.valid_start_pos?(input, self.current_player.color)
             start_pos = input.split(" ").map(&:to_i)
             piece = self.board[start_pos]
+            piece.selected = true
+            system("clear")
+            self.display.render
         rescue StandardError => exception
+            system("clear")
+            self.display.render
             puts exception
             retry
         end
@@ -57,13 +62,24 @@ class Game
             puts "Enter end position in the form 'row col' to move. Enter c to switch pieces"
             input_pos = gets.chomp
             if input_pos == "c"
+                piece.selected = false
+                system("clear")
+                self.display.render
                 self.get_start_pos
             else
                 self.valid_end_pos?(input_pos, piece, out_of_check_moves)
                 pos_end = input_pos.split(" ").map(&:to_i)
                 self.board.move_piece(start_pos, pos_end)
+                if self.board.in_check?(self.current_player.color)
+                    self.board.undo_move_piece(start_pos, pos_end)
+                    raise "This move is invalid. The king would be in check."
+                end
+                piece.selected = false
+                system("clear")
             end
         rescue StandardError => exception
+            system("clear")
+            self.display.render
             puts exception
             retry
         end
@@ -82,16 +98,11 @@ class Game
         raise "This is not your piece" if self.board[arr.map(&:to_i)].color != color
     end
 
-    def valid_end_pos?(pos, piece, king_v_moves)
+    def valid_end_pos?(pos, piece, out_of_check_moves)
         arr = pos.split(" ")
         h, v = arr
         raise "This position is not on the board" unless (h.to_i.between?(1,7) || h == "0") && (v.to_i.between?(1,7) || v == "0") && ((h+v).length == 2)
         raise "Not a legal move" unless piece.valid_moves.include?(arr.map(&:to_i))
-        if self.board.in_check?(self.current_player.color) && !self.board.checkmate?(self.current_player.color)
-            if !out_of_check_moves[piece.pos].include?(arr.map(&:to_i))
-                raise "This move doesn't move the king out of check"
-            end
-        end
     end
 
 end

@@ -13,17 +13,33 @@ class Display
             if row_idx.even?
                 row.each_with_index do |piece, s_idx|
                     if s_idx.even?
-                        print (" " + piece.symbol + " ").colorize( :background => :white)
+                        if piece.selected
+                            print (" " + piece.symbol + " ").colorize(:color => :red, :background => :light_black)
+                        else
+                            print (" " + piece.symbol + " ").colorize( :background => :light_black)
+                        end
                     else
-                        print (" " + piece.symbol + " ").colorize( :background => :black)
+                        if piece.selected
+                            print (" " + piece.symbol + " ").colorize(:color => :red, :background => :light_magenta)
+                        else
+                            print (" " + piece.symbol + " ").colorize( :background => :light_magenta)
+                        end
                     end
                 end
             else
                 row.each_with_index do |piece, s_idx|
                     if s_idx.odd?
-                        print (" " + piece.symbol + " ").colorize( :background => :white)
+                        if piece.selected
+                            print (" " + piece.symbol + " ").colorize(:color => :red, :background => :light_black)
+                        else
+                            print (" " + piece.symbol + " ").colorize( :background => :light_black)
+                        end
                     else
-                        print (" " + piece.symbol + " ").colorize( :background => :black)
+                        if piece.selected
+                            print (" " + piece.symbol + " ").colorize(:color => :red, :background => :light_magenta)
+                        else
+                            print (" " + piece.symbol + " ").colorize( :background => :light_magenta)
+                        end
                     end
                 end
             end

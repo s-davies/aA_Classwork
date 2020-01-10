@@ -4,9 +4,9 @@ class Knight < Piece
     include Stepable
     def symbol
         if self.color.downcase == :white
-            "♘"
+            "♘".white
         else
-            "♞"
+            "♞".black
         end
     end
     
