@@ -1,0 +1,18 @@
+/* PUT FLUID GRID CODE HERE */
+.col {
+  float: left;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+
+.col:last-of-type {
+  padding: 0px;
+}
+
+.col-1-5 {
+  width: 19%;
+}
+
+.col-4-5 {
+  width: 79%;
+}
