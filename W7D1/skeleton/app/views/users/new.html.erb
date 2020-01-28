@@ -1,0 +1,11 @@
+<%# <%= render 'form', user: @user, type: new %> 
+<h1>Create User</h1>
+<form action="<%= users_url %>" method="POST">
+    <label for="">Username
+    <input type="text" name="user[user_name]">
+    </label>
+    <label for="">Password
+    <input type="password" name="user[password]">
+    </label>
+    <input type="submit" value="Create me!">
+</form> 
