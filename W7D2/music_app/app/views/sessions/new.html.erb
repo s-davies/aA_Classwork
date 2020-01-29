@@ -1,0 +1,21 @@
+
+
+<h3>Sign In</h3>
+
+<form action="<%= new_user_url%>" method="GET">
+<%= auth_token %>
+    <input type="submit" value="Go to Sign Up">
+</form>
+<section>
+    <form action="<%= session_url %>" method="POST">
+    <%= auth_token %>
+        <label for="user-email">Email</label>
+        <input id="user-email" type="text" name="user[email]">
+
+        <label for="user-password">Password
+        <input id="user-password" type="password" name="user[password]">
+        </label>
+
+        <input type="submit" value="Submit">
+    </form>
+</section>
