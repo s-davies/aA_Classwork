@@ -1,0 +1,30 @@
+.sections-nav nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-bottom: 2px solid $light-gray;
+}
+
+.sections-nav ul {
+  display: flex;
+  align-items: baseline;
+}
+.sections-nav li {
+  // margin-left: 10px;
+  padding: 10px;
+}
+
+.sections-nav button {
+	background: none;
+	padding: 0px;
+	color: #000;
+	font-weight: normal;
+  border: none;
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+.sections-nav button:hover {
+	background-color: $lightest-gray;
+}
+
