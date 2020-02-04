@@ -1,0 +1,36 @@
+<h1>
+  <%= @post.title %> by <%= @post.author.username %>
+</h1>
+
+<h4>Content</h4>
+<p>
+  <%= @post.content %>
+</p>
+<a href="<%= edit_post_url(@post) %>">Edit</a>
+<h4>Comments</h4>
+<% @post.comments.each do |comment| %>
+  <% if comment.parent_comment_id.nil? %>
+    <p><%= comment.content %></p>
+    <% comment.replies.each do |reply| %>
+      <p><%= reply.content %></p>
+    <% end %>
+  <% end %>
+  
+
+<% end %>
+
+<form action="<%=post_comments_url(@post)%>" method="post">
+  <%= auth_token %>
+  <textarea name="comment[content]" cols="30" rows="10"></textarea>
+  <input type="submit" value="Post comment">
+</form>
+
+
+
+<h4>Subs</h4>
+<ul>
+  <% @post.subs.each do |sub| %>
+    <li><a href="<%= sub_url(sub) %>"><%= sub.title %></a></li>
+  <% end %>
+</ul>
+
