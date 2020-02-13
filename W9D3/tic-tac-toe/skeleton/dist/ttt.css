@@ -1,0 +1,29 @@
+.ttt ul {
+  display: flex;
+  flex-wrap: wrap;
+  width: 324px;
+  height: (300 + 3 * 8) px;
+  border: 4px solid black;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ttt-square {
+  width: 100px;
+  height: 100px;
+  list-style: none;
+  background-color:gray;
+  border: 4px solid black;
+  font-size: 72px;
+  text-align: center;
+}
+
+.ttt-square:hover {
+  background-color: yellow;
+}

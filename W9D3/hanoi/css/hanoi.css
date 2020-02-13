@@ -1,0 +1,38 @@
+ul li {
+  list-style: none;
+  background-color: gray;
+  height: 20px;
+  margin-bottom: 2px;
+  border-radius: 10px;
+}
+.disc-1 {
+  width: 40px;
+}
+.disc-2 {
+  width: 60px;
+}
+.disc-3 {
+  width: 80px;
+}
+
+ul {
+  width: 100px;
+  height: 100px;
+  border-bottom: 10px solid black;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+ul:hover {
+  border-bottom: 10px solid blue;
+}
+
+.hanoi {
+  display: flex;
+  width: 320px;
+  justify-content: space-between;
+}
+

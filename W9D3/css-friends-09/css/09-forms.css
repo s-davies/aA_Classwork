@@ -1,0 +1,21 @@
+/* PHASE 9: Forms */
+.content-main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-main form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #eeeeee;
+  padding-left: 19px;
+  margin-left: 20px;
+  width: 500px;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+}
+
+.form-buttons {
+  display: flex;
+}
