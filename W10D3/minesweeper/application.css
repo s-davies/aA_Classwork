@@ -1,0 +1,48 @@
+.grid {
+  display:flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.tile {
+  background-color: lightgray;
+  border-style: outset;
+  height: 20px;
+  width: 20px;
+}
+
+.revealed {
+  border-style: inset;
+}
+
+.losing-bomb {
+  background-color: red;
+}
+
+.header-div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+  background-color: lightgray;
+  height: 60px;
+  width: 230px;
+  border: 2px solid chartreuse;
+}
+
+.restart {
+  height: 40px;
+  width: 40px;
+  background-color: lightgray;
+  border-style: outset;
+  text-align: center;
+  font-size: 32px;
+}
+
+.pressed {
+  border-style: inset;
+}
