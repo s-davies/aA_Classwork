@@ -1,0 +1,1 @@
+jbuilder.partial! 'users/user', user: @user

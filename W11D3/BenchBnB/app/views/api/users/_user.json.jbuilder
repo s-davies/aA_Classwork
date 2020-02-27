@@ -1,0 +1,1 @@
+jbuilder.extract! user, :id, :username, :
